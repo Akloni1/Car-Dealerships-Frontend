@@ -1,0 +1,71 @@
+
+
+<div class="col-xs-8 col-xs-offset-2">
+  <h2>Заполните следующие поля для добавления автомобиля в салон</h2>
+    <form class="example-form" [formGroup]="form" (ngSubmit)="submit()">
+
+  <mat-form-field class="stamp" appearance="fill">
+    <mat-label>Марка</mat-label>
+    <mat-select
+     formControlName="stamp"
+    name="stamp">
+      <mat-option value="BMW">BMW</mat-option>
+      <mat-option value="Mercedes">Mercedes</mat-option>
+    </mat-select>
+    
+  </mat-form-field>
+
+  <mat-form-field class="color" appearance="fill">
+  <mat-label>Цвет</mat-label>
+    <mat-select
+    formControlName="color"
+             name="color"
+    >
+      <mat-option value="Green">Green</mat-option>
+      <mat-option value="Red">Red</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button class="colorBTN" type="submit">
+    Добавить 
+ </button>
+    </form>
+
+
+ 
+    <p *ngIf="status.status=='error'">{{status.message}}</p>
+</div>
+<table mat-table [dataSource]="response" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="nameCarDealership">
+    <th mat-header-cell *matHeaderCellDef> Название салона </th>
+    <td mat-cell *matCellDef="let element"> {{element.nameCarDealership}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="stamp">
+    <th mat-header-cell *matHeaderCellDef> Модель </th>
+    <td mat-cell *matCellDef="let element"> {{element.stamp}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="color">
+    <th mat-header-cell *matHeaderCellDef> Цвет </th>
+    <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="count">
+    <th mat-header-cell *matHeaderCellDef> Количество машин </th>
+    <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+
