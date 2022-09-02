@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 
 
 import { INumberOfCarsInShowrooms } from './app.number-of-cars-in-showrooms.interface';
-import { IStatus } from './app.status.interface';
+import { ICarOutput } from './app.car-output.interface';
 import { CarService } from './app.service';
 
 @Component({
@@ -21,12 +21,14 @@ import { CarService } from './app.service';
 })
 export class AppComponent implements OnInit {
 
-  response!: INumberOfCarsInShowrooms[];
+  response: INumberOfCarsInShowrooms[]=[];
   form: FormGroup;
- 
-  status: IStatus={
-    status: "",
-    message: ""    
+  error: any
+  car: ICarOutput={
+    idCar: 0,
+    stamp: "",
+    color: "",   
+    idCarDealership: 0   
   };
 
   private subscriptions$ = new Subscription();
@@ -44,9 +46,15 @@ export class AppComponent implements OnInit {
 
   submit() {
     this.subscriptions$.add(
-      this.carService.addCar(this.form.value).subscribe((response) => {
-        this.status = response
-      })
+      this.carService.addCar(this.form.value).subscribe((response: ICarOutput) => {
+        this.car = response
+      },
+      (error) => {
+        this.error = error.error
+        this.error = this.error.split(' ')[1]
+        console.log(error)
+      }
+      )
     );
     this.GetNumberOfCarsInShowrooms();
   }
@@ -58,6 +66,8 @@ export class AppComponent implements OnInit {
       })
     );
   }
+
+  
 
   displayedColumns: string[] = ['nameCarDealership', 'stamp', 'color', 'count'];
  

@@ -30,34 +30,31 @@
  </button>
     </form>
 
-
+<p>{{error}}</p>
  
-    <p *ngIf="status.status=='error'">{{status.message}}</p>
+    
 </div>
 <table mat-table [dataSource]="response" class="mat-elevation-z8">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
+ 
   <ng-container matColumnDef="nameCarDealership">
     <th mat-header-cell *matHeaderCellDef> Название салона </th>
     <td mat-cell *matCellDef="let element"> {{element.nameCarDealership}} </td>
   </ng-container>
 
-  <!-- Name Column -->
+  
   <ng-container matColumnDef="stamp">
     <th mat-header-cell *matHeaderCellDef> Модель </th>
     <td mat-cell *matCellDef="let element"> {{element.stamp}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
+  
   <ng-container matColumnDef="color">
     <th mat-header-cell *matHeaderCellDef> Цвет </th>
     <td mat-cell *matCellDef="let element"> {{element.color}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
+ 
   <ng-container matColumnDef="count">
     <th mat-header-cell *matHeaderCellDef> Количество машин </th>
     <td mat-cell *matCellDef="let element"> {{element.count}} </td>
